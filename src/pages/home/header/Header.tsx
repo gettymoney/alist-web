@@ -5,7 +5,9 @@ import {
   Center,
   Icon,
   Kbd,
+  Text,
   CenterProps,
+  Anchor,
 } from "@hope-ui/solid"
 import { changeColor } from "seemly"
 import { Show, createMemo } from "solid-js"
@@ -16,10 +18,12 @@ import { Container } from "../Container"
 import { bus } from "~/utils"
 import { Layout } from "./layout"
 import { isMac } from "~/utils/compatibility"
+import { Link } from "@solidjs/router"
 
 export const Header = () => {
   const logos = getSetting("logo").split("\n")
   const logo = useColorModeValue(logos[0], logos.pop())
+  const title = getSetting("site_title")
 
   const stickyProps = createMemo<CenterProps>(() => {
     switch (local["position_of_header_navbar"]) {
@@ -45,13 +49,19 @@ export const Header = () => {
           w="$full"
           justifyContent="space-between"
         >
-          <HStack class="header-left" h="44px">
+          <HStack class="header-left" h="44px" gap="10px">
             <Image
               src={logo()!}
               h="$full"
               w="auto"
               fallback={<CenterLoading />}
+              alt={title}
             />
+            <Anchor as={Link} href="/">
+              <Text size="lg">
+                <b>{title}</b>
+              </Text>
+            </Anchor>
           </HStack>
           <HStack class="header-right" spacing="$2">
             <Show when={objStore.state === State.Folder}>

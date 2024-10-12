@@ -5,6 +5,7 @@ import { convertURL, hoverColor } from "~/utils"
 import { Component, createMemo } from "solid-js"
 import { useLink } from "~/hooks"
 import { TbExternalLink } from "solid-icons/tb"
+import Download from "./download"
 
 const IframePreview = (props: { scheme: string }) => {
   const { currentObjLink } = useLink()
@@ -17,24 +18,28 @@ const IframePreview = (props: { scheme: string }) => {
     })
   })
   return (
-    <BoxWithFullScreen w="$full" h="70vh">
-      <hope.iframe w="$full" h="$full" src={iframeSrc()} />
-      <Icon
-        pos="absolute"
-        right="$2"
-        bottom="$10"
-        aria-label="Open in new tab"
-        as={TbExternalLink}
-        onClick={() => {
-          window.open(iframeSrc(), "_blank")
-        }}
-        cursor="pointer"
-        rounded="$md"
-        bgColor={hoverColor()}
-        p="$1"
-        boxSize="$7"
-      />
-    </BoxWithFullScreen>
+    <>
+      <BoxWithFullScreen w="$full" h="70vh">
+        <hope.iframe w="$full" h="$full" src={iframeSrc()} />
+        <Icon
+          pos="absolute"
+          right="$2"
+          bottom="$10"
+          aria-label="Open in new tab"
+          as={TbExternalLink}
+          onClick={() => {
+            window.open(iframeSrc(), "_blank")
+          }}
+          cursor="pointer"
+          rounded="$md"
+          bgColor={hoverColor()}
+          p="$1"
+          boxSize="$7"
+        />
+      </BoxWithFullScreen>
+
+      <Download hideCover />
+    </>
   )
 }
 

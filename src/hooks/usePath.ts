@@ -153,7 +153,8 @@ export const usePath = () => {
           ObjStore.setReadme(data.readme)
           ObjStore.setHeader(data.header)
           ObjStore.setRelated(data.related ?? [])
-          ObjStore.setRawUrl(data.raw_url)
+          // 强制设置 rawUrl 为 https，百度网盘有可能会返回 http 的直链，会引起 mix-content 错误
+          ObjStore.setRawUrl(data.raw_url.replace(/^https?:/, "https:"))
           ObjStore.setState(State.File)
         }
       },
