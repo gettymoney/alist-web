@@ -17,7 +17,7 @@ const Preview = () => {
   }
   let ap: any
   const objToAudio = (obj: StoreObj) => {
-    let lrc = "[00:00.00] 暂无歌词"
+    let lrc = undefined
     const lrcObj = objStore.objs.find((o) => {
       return baseName(o.name) === baseName(obj.name) && o.name.endsWith(".lrc")
     })

@@ -15,10 +15,7 @@ export const handleResp = <T>(
   } else {
     notify_error && notify.error(resp.message)
     if (auth && resp.code === 401) {
-      bus.emit(
-        "to",
-        `/@login?redirect=${encodeURIComponent(location.pathname)}`,
-      )
+      bus.emit("to", `/login?redirect=${encodeURIComponent(location.pathname)}`)
       return
     }
     fail?.(resp.message, resp.code)
